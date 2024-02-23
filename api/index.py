@@ -83,8 +83,8 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write('Hello, world!'.encode('utf-8'))
         kv = KV()
-        self.wfile.write(kv.get_kv_conf())
-        self.wfile.write(kv.has_auth())
-        self.wfile.write(kv.set(key="sss", value="asasd"))
-        self.wfile.write(kv.get("sss"))        
+        self.wfile.write(kv.get_kv_conf().encode('utf-8'))
+        self.wfile.write(kv.has_auth().encode('utf-8'))
+        self.wfile.write(kv.set(key="sss", value="asasd").encode('utf-8'))
+        self.wfile.write(kv.get("sss").encode('utf-8'))        
         return
