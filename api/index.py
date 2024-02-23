@@ -8,3 +8,4 @@ async def test():
     print(app.has_auth())
     print(app.set(key="sss", value="asasd"))
     print(app.get("sss"))
+    print("Hello!")
