@@ -1,2 +1,3 @@
 pytest
 vercel_kv
+redis==3.5.3
