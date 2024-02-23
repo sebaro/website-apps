@@ -1,4 +1,11 @@
-import redis
+import pytest
 
-url_connection = redis.from_url("redis://default:3c47bc17a9d848babf5a2f90c33e4ac7@helped-macaw-35286.upstash.io:35286")
-url_connection.ping()
+from vercel_kv import KV
+
+
+@pytest.mark.asyncio
+async def test():
+    kv = KV()
+    print(kv.has_auth())
+    print(kv.set(key="sss", value="asasd"))
+    print(kv.get("sss"))
