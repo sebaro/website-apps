@@ -9,7 +9,8 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Content-type','text/plain')
         self.end_headers()
         self.wfile.write('Hello, world!'.encode('utf-8'))
-        self.wfile.write(KV.has_auth())
-        self.wfile.write(KV.set(key="sss", value="asasd"))
-        self.wfile.write(VK.get("sss"))        
+        kv = KV()
+        self.wfile.write(kv.has_auth())
+        self.wfile.write(kv.set(key="sss", value="asasd"))
+        self.wfile.write(kv.get("sss"))        
         return
