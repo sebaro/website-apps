@@ -90,7 +90,8 @@ class handler(BaseHTTPRequestHandler):
         #self.wfile.write('<br>'.encode('utf-8'))
         #self.wfile.write(str(kv.set(key="sss", value="asasd")).encode('utf-8'))
         #self.wfile.write('<br>'.encode('utf-8'))
-        #self.wfile.write(str(kv.get("sss")).encode('utf-8'))        
+        #self.wfile.write(str(kv.get("sss")).encode('utf-8'))    
+        self.wfile.write(str(os.getenv("KV_URL")).encode('utf-8'))     
         r = redis.from_url(os.getenv("KV_URL"))
         keys = r.keys()
         for key in keys:
