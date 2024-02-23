@@ -73,6 +73,8 @@ class KV:
         resp = requests.get(f'{self.kv_config.rest_api_url}/get/{key}', headers=headers)
         return resp.json()['result']
 
+import redis        
+
 from http.server import BaseHTTPRequestHandler
 
 class handler(BaseHTTPRequestHandler):
@@ -82,11 +84,13 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Content-type','text/plain')
         self.end_headers()
         self.wfile.write('Hello, world!'.encode('utf-8'))
-        kv = KV()
-        self.wfile.write('<br>'.encode('utf-8'))
-        self.wfile.write(str(kv.has_auth()).encode('utf-8'))
-        self.wfile.write('<br>'.encode('utf-8'))
-        self.wfile.write(str(kv.set(key="sss", value="asasd")).encode('utf-8'))
-        self.wfile.write('<br>'.encode('utf-8'))
-        self.wfile.write(str(kv.get("sss")).encode('utf-8'))        
+        //kv = KV()
+        //self.wfile.write('<br>'.encode('utf-8'))
+        //self.wfile.write(str(kv.has_auth()).encode('utf-8'))
+        //self.wfile.write('<br>'.encode('utf-8'))
+        //self.wfile.write(str(kv.set(key="sss", value="asasd")).encode('utf-8'))
+        //self.wfile.write('<br>'.encode('utf-8'))
+        //self.wfile.write(str(kv.get("sss")).encode('utf-8'))        
+        url_connection = redis.from_url(os.getenv("KV_URL"))
+        url_connection.ping()
         return
