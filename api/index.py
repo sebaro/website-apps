@@ -34,7 +34,7 @@ class handler(BaseHTTPRequestHandler):
         j = json.loads(post_data)
         j["date"] = datetime.now().strftime("%Y-%m-%d/%H:%M")
         k = str(round(time.time() * 1000))
-        r.set(k, json.dumps(j).encode('utf-8'))
+        r.set(k, json.dumps(j))
         self._set_headers()
         if r.exists(k):
             self.wfile.write(json.dumps({"response":"success"}).encode('utf-8'))        
