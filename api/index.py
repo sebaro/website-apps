@@ -33,6 +33,7 @@ class handler(BaseHTTPRequestHandler):
         post_data = self.rfile.read(content_length)
         j = json.loads(post_data)
         j["date"] = datetime.now().strftime("%Y-%m-%d/%H:%M")
+        self.wfile.write(json.dumps(j).encode('utf-8')) 
         k = str(round(time.time() * 1000))
         r.set(k, json.dumps(j))
         self._set_headers()
