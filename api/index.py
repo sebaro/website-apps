@@ -1,6 +1,7 @@
 import os
 import json
 import time
+from datetime import datetime
 
 import redis        
 
@@ -30,8 +31,10 @@ class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
+        j = json.loads(post_data)
+        j["date"] = datetime.now().strftime("%Y-%m-%d/%H:%M")
         k = str(round(time.time() * 1000))
-        r.set(k, post_data)
+        r.set(k, json.dumps(j).encode('utf-8'))
         self._set_headers()
         if r.exists(k):
             self.wfile.write(json.dumps({"response":"success"}).encode('utf-8'))        
