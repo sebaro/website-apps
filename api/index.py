@@ -23,9 +23,9 @@ class handler(BaseHTTPRequestHandler):
         s = "["
         keys = r.keys()
         for key in keys:
-            #print('Key:', key)
-            #print('Value:', r.get(key))
-            j.append(json.loads(str(r.get(key))))
+            v = str(r.get(key))
+            if v:
+                j.append(json.loads(s))
             if s == "[":
                 s = s + str(r.get(key))
             else :
