@@ -19,7 +19,7 @@ class handler(BaseHTTPRequestHandler):
         for key in keys:
             print('Key:', key)
             print('Value:', r.get(key))
-            j.append(r.get(key))
+            j.append(str(r.get(key)))
         print(j)
         json.dumps(j)
         self.wfile.write(json.dumps(j).encode('utf-8'))
