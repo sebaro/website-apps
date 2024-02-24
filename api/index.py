@@ -7,6 +7,12 @@ import redis
 
 r = redis.from_url(os.getenv("KV_URL").replace('redis://', 'rediss://'))
 
+def json_loads_safe(data):
+    try:
+        return json.loads(data)
+    except (ValueError, TypeError):
+        return None
+
 from http.server import BaseHTTPRequestHandler
 
 class handler(BaseHTTPRequestHandler):
@@ -23,10 +29,9 @@ class handler(BaseHTTPRequestHandler):
         keys = r.keys()
         for key in keys:
             v = r.get(key).decode('utf-8')
-            if len(v) > 0:
-                print("|"+v+"|")
-                self.wfile.write(v.encode('utf-8'))
-                j.append(json.loads(v))
+            v = json_loads_safe(v)
+            if v:
+                j.append(v)
         self.wfile.write(json.dumps(j).encode('utf-8'))
         return
 
