@@ -24,7 +24,8 @@ class handler(BaseHTTPRequestHandler):
         for key in keys:
             v = r.get(key)
             if v:
-                j.append(json.loads(v))
+                self.wfile.write(type(v).encode('utf-8'))
+                j.append(json.loads(v.decode("utf-8")))
         self.wfile.write(json.dumps(j).encode('utf-8'))
         return
 
