@@ -20,20 +20,12 @@ class handler(BaseHTTPRequestHandler):
         self._set_headers()
         #self.wfile.write('Hello, world!'.encode('utf-8'))
         j = [] 
-        s = "["
         keys = r.keys()
         for key in keys:
-            v = str(r.get(key))
+            v = r.get(key)
             if v:
-                self.wfile.write(v.encode('utf-8'))
                 j.append(json.loads(v))
-            if s == "[":
-                s = s + str(r.get(key))
-            else :
-                s = s + "," + str(r.get(key))
-        s = s + "]"
         self.wfile.write(json.dumps(j).encode('utf-8'))
-        self.wfile.write(s.encode('utf-8'))
         return
 
     def do_POST(self):
