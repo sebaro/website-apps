@@ -27,7 +27,6 @@ class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
-        self.wfile.write(post_data.encode('utf-8'))
         k = str(round(time.time() * 1000))
         r.set(k, post_data)
         return
