@@ -10,10 +10,13 @@ from http.server import BaseHTTPRequestHandler
 
 class handler(BaseHTTPRequestHandler):
 
-    def do_GET(self):
+    def _set_headers(self):
         self.send_response(200)
-        self.send_header('Content-type','application/json')
-        self.end_headers()
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()    
+
+    def do_GET(self):
+        self._set_headers()
         #self.wfile.write('Hello, world!'.encode('utf-8'))
         j = [] 
         keys = r.keys()
@@ -29,4 +32,9 @@ class handler(BaseHTTPRequestHandler):
         post_data = self.rfile.read(content_length)
         k = str(round(time.time() * 1000))
         r.set(k, post_data)
+        self._set_headers()
+        if r.exists(k):
+            self.wfile.write(json.dumps({"response":"success"}).encode('utf-8'))        
+        else:
+            self.wfile.write(json.dumps({"response":"error"}).encode('utf-8'))        
         return
