@@ -27,6 +27,6 @@ class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
-        j = json.load(post_data)
+        j = json.loads(post_data)
         k = str(round(time.time() * 1000))
         r.set(k, j)
