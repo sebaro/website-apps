@@ -22,7 +22,6 @@ class handler(BaseHTTPRequestHandler):
             #print('Value:', r.get(key))
             j.append(str(r.get(key)))
         self.wfile.write(json.dumps(j).encode('utf-8'))
-        self.wfile.write(j.encode('utf-8'))
         return
 
     def do_POST(self):
