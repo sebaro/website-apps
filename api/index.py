@@ -27,9 +27,9 @@ class handler(BaseHTTPRequestHandler):
             #print('Value:', r.get(key))
             j.append(str(r.get(key)))
             if s == "[":
-                s = s + str(r.get(key)
+                s = s + str(r.get(key))
             else :
-                s = s + "," + str(r.get(key)
+                s = s + "," + str(r.get(key))
         s = s + "]"
         self.wfile.write(json.dumps(j).encode('utf-8'))
         self.wfile.write(s.encode('utf-8'))
