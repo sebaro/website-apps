@@ -25,6 +25,7 @@ class handler(BaseHTTPRequestHandler):
             #print('Key:', key)
             #print('Value:', r.get(key))
             j.append(str(r.get(key)))
+            self.wfile.write(r.get(key))
         self.wfile.write(json.dumps(j).encode('utf-8'))
         return
 
