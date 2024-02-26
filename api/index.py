@@ -1,7 +1,6 @@
 import os
 import json
 import time
-from datetime import datetime
 
 import redis        
 
@@ -17,14 +16,12 @@ from http.server import BaseHTTPRequestHandler
 
 class handler(BaseHTTPRequestHandler):
 
-    def _set_headers(self):
+    def set_headers(self):
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
         self.end_headers()    
 
-    def do_GET(self):
-        self._set_headers()
-        #self.wfile.write('Hello, world!'.encode('utf-8'))
+    def dump_data(self):
         j = [] 
         keys = r.keys()
         for key in keys:
@@ -32,20 +29,19 @@ class handler(BaseHTTPRequestHandler):
             v = json_loads_safe(v)
             if v:
                 j.append(v)
-        self.wfile.write(json.dumps(j).encode('utf-8'))
+        self.wfile.write(json.dumps(j).encode('utf-8'))        
+
+    def do_GET(self):
+        self.set_headers()
+        self.dump_data()
         return
 
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
         j = json.loads(post_data)
-        j["date"] = datetime.now().strftime("%Y-%m-%d/%H:%M")
         k = str(round(time.time() * 1000))
         r.set(k, json.dumps(j))
-        self._set_headers()
-        self.wfile.write(json.dumps(j).encode('utf-8')) 
-        if r.exists(k):
-            self.wfile.write(json.dumps({"response":"success"}).encode('utf-8'))        
-        else:
-            self.wfile.write(json.dumps({"response":"error"}).encode('utf-8'))        
+        self.set_headers()
+        self.dump_data()
         return
