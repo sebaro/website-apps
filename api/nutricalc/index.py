@@ -1,4 +1,6 @@
 
+import os.path
+from urllib.request import Request, urlopen
 import json
 
 def find(string, words):
@@ -19,8 +21,13 @@ def format_number(num):
 
 def get_data(query):
 	data = []
-	with open("data.json") as j:
-		j = json.load(j)
+	if os.path.isfile("data.json"):
+		with open("data.json") as j:
+			j = json.load(j)
+	else
+		req = Request("https://fn9db3x6ox3rb3b7.public.blob.vercel-storage.com/nutricalc/data-jhXWh0BQUgtiHBPK8XKWUfPduRBill.json")
+		req.add_header("User-Agent", "curl/8.5.0")
+		data = json.loads(urlopen(req).read())
 	if query["method"] == "search":
 		if query["type"] == "food":
 			for e in j["food"]:
