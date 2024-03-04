@@ -1,7 +1,7 @@
 {
     "redirects": [
-        { "source": "/contact", "destination": "/api/contact", "statusCode": 301 },
-        { "source": "/nutricalc", "destination": "/api/nutricalc", "statusCode": 301 }
+        { "source": "/contact", "destination": "/api/contact" },
+        { "source": "/nutricalc", "destination": "/api/nutricalc" }
     ],
     "headers": [
         {
