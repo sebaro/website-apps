@@ -14,10 +14,10 @@ def find(string, words):
 		return False
 
 def format_number(num):
-  if num % 1 == 0:
-    return int(num)
-  else:
-    return num
+	if num % 1 == 0:
+		return int(num)
+	else:
+		return num
 
 def get_data(query):
 	data = []
@@ -25,7 +25,7 @@ def get_data(query):
 		with open("data.json") as j:
 			j = json.load(j)
 	else:
-		req = Request("https://fn9db3x6ox3rb3b7.public.blob.vercel-storage.com/nutricalc/data-jhXWh0BQUgtiHBPK8XKWUfPduRBill.json")
+		req = Request("https://gitlab.com/sebaro/website/raw/main/nutricalc/data.json")
 		req.add_header("User-Agent", "curl/8.5.0")
 		j = json.loads(urlopen(req).read())
 	if query["method"] == "search":
