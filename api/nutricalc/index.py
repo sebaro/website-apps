@@ -103,9 +103,6 @@ class handler(BaseHTTPRequestHandler):
 		self.send_header('Content-type', 'application/json')
 		self.end_headers()
 
-	def do_HEAD(self):
-		self._set_headers()
-
 	def do_POST(self):
 		content_length = int(self.headers['Content-Length'])
 		post_data = self.rfile.read(content_length)
