@@ -13,6 +13,7 @@ class handler(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
         self.send_response(200)
+        self.end_headers()
         return
 
     def do_POST(self):
