@@ -25,7 +25,7 @@ def get_data(query):
 		with open("data.json") as j:
 			j = json.load(j)
 	else:
-		req = Request("https://gitlab.com/sebaro/website/raw/main/nutricalc/data.json")
+		req = Request("https://gitlab.com/sebaro/website/raw/main/nutrio/data.json")
 		req.add_header("User-Agent", "curl/8.5.0")
 		j = json.loads(urlopen(req).read())
 	if query["method"] == "search":
